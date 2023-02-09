@@ -1,0 +1,22 @@
+﻿
+@model ARSM___Avtobusi_R.S.Makedonija.Models.Ticket
+
+@{
+    ViewBag.Title = "DownloadTicket";
+}
+
+<h2>DownloadTicket</h2>
+
+<div id="PrintPDF">
+    <div>
+        @Model.Name
+        <br />
+        @Model.Surname
+        <br />
+        @Model.Route.Relation
+        <br />
+        @Model.Route.TimePlace
+        <br />
+    </div>
+    @Html.ActionLink("Плати", "Print", new { id = Model.Id })
+</div>

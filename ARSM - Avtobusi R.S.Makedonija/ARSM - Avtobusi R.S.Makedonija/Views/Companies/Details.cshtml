@@ -1,0 +1,137 @@
+﻿@model ARSM___Avtobusi_R.S.Makedonija.Models.Company
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    dt {
+        color: #37c77f;
+    }
+
+    #BackToList, #InsertRouteToCompany {
+        text-decoration: none;
+        color: lightgray;
+    }
+
+    #firstBorder {
+        width: 259px;
+        height: 39px;
+        padding-top: 1px;
+        margin-top: 4px;
+        text-align: center;
+        border: 1px solid #383737d6;
+    }
+
+    #secondBorder {
+        border: 1px solid #383737d6;
+        width: 270px;
+        height: 34px;
+        text-align: center;
+        margin-left: -6px;
+        padding-top: 6px;
+    }
+
+        #firstBorder:hover, #secondBorder:hover {
+            background-color: #303030;
+            border-color: #303030;
+        }
+
+    #RelationLink {
+        color: lightgray;
+        font-size: 15px;
+    }
+
+        #RelationLink:hover {
+            padding-top: 1px;
+            font-size: 19px;
+            color: #fff;
+        }
+
+    #Edit, #Delete {
+        color: white;
+    }
+</style>
+<hr />
+<div style="margin-left:498px">
+    <img src="@Model.Logo" width="125" height="125" style="border-radius: 50%" />
+    <h2 style=" width: 350px; margin-top: -78px; padding-bottom: 32px; margin-left: 150px; color: #37c77f;">@Model.Name</h2>
+</div>
+
+<hr />
+
+<div style=" font-size: 19px; font-family: Helvetica, sans-serif; padding-left: 25px;">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Routes)
+        </dt>
+
+    </dl>
+
+    <div>
+        <ul>
+            @foreach (var route in Model.Routes)
+            {
+            <li>
+                <a id="RelationLink" href="/Routes/Details/@route.Id?idCompany=@Model.Id">
+                    <div id="firstBorder">
+                        <div id="secondBorder">
+                            @route.Relation - @route.TimePlace.Split(',').ToList().First().ToString()
+                        </div>
+                    </div>
+                    @{
+                        if (User.IsInRole("Administrator") || User.Identity.Name.ToLower().Contains(Model.Name.ToLower()))
+                        {
+                            <span><a href="~/Routes/Delete/@route.Id">      >    Избриши релација</a></span>
+                        }
+                    }
+                </a>
+                
+            </li>
+            }
+
+        </ul>
+    </div>
+
+
+</div>
+<p>
+    @{
+        if (User.Identity.Name.ToLower().Contains(Model.Name.ToLower()) || User.IsInRole("Administrator"))
+        {
+            <button type="button" class="btn btn-outline-dark">
+                @Html.ActionLink("Додади рута", "Create","Routes", new { id = Model.Id }, htmlAttributes: new { id = "InsertRouteToCompany" })
+            </button>
+            <button type="button" class="btn btn-outline-dark">
+                @Html.ActionLink("Промени", "Edit", new { id = Model.Id }, htmlAttributes: new { id = "Edit" })
+            </button>
+            <button type="button" class="btn btn-outline-dark">
+                @Html.ActionLink("Избриши", "Delete", new { id = Model.Id }, htmlAttributes: new { id = "Delete" })
+            </button>
+        }
+    }
+    <button type="button" class="btn btn-outline-dark">@Html.ActionLink("Назад", "Index", "Home", null, htmlAttributes: new { id = "BackToList" })</button>
+
+</p>

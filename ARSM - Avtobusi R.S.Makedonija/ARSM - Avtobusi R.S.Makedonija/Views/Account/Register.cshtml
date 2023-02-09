@@ -1,0 +1,49 @@
+﻿@model ARSM___Avtobusi_R.S.Makedonija.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<hr />
+<div style="margin:auto; width: 450px;">
+    <h2 style=" width: 350px; margin: auto; color: #37c77f; text-align: center;">Регистрирај се</h2>
+    <h4 style=" width: 450px; padding-top: 10px; margin: auto; color: #37c77f; text-align: center;">Креирај нов кориснички профил</h4>
+    
+</div>
+
+<hr />
+<h4 style="margin: auto;"><a href="~/Home/ZaKompanii" style="text-decoration: underline;">Упатство за регистрација на компании</a></h4>
+<hr />
+
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("Електронска адреса - email", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Лозинка", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Потврди лозинка", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group" style="margin-top: 5px;">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-outline-dark" value="Регистрирај се" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

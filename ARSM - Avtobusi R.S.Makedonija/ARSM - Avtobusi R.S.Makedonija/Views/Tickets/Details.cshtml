@@ -1,0 +1,65 @@
+﻿@model ARSM___Avtobusi_R.S.Makedonija.Models.Ticket
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<hr />
+<h2 style="text-align: center;">Билет</h2>
+<hr />
+
+<div>
+
+    <dl class="dl-horizontal" style="font-family: Helvetica, sans-serif; font-size: 15px;">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Route.Relation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Route.Relation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Route.TimePlace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Route.TimePlace)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Route.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Route.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <b>Задолжително прикажето билетот пред патување!</b><hr/>
+    Датум и време на издавање на билетот:
+    @DateTime.Now - АРСМ
+</p>

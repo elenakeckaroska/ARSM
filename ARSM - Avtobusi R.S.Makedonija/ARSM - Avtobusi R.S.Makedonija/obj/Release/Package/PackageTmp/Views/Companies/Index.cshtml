@@ -1,0 +1,75 @@
+﻿
+@model IEnumerable<ARSM___Avtobusi_R.S.Makedonija.Models.Company>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<hr />
+
+<div style="text-align:center;">
+    <h2 style=" width: 350px; margin: auto; color: #37c77f;">КОМПАНИИ</h2>
+</div>
+
+<hr />
+<div style="margin-left: -130px;">
+    <table id="companiesIndex">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Logo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OwnerName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <img src="@item.Logo" width="100" height="100" style="border-radius: 50%" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OwnerName)
+                    </td>
+                    <td>
+                        @{
+                            if (User.Identity.Name.ToLower().Contains(item.Name.ToLower()) || User.IsInRole("Administrator"))
+                            {
+                                @Html.ActionLink("Додади релација", "InsertNewRoute", new { id = item.Id });<span> | </span>
+                                @Html.ActionLink("Измени", "Edit", new { id = item.Id }); <span> | </span>
+                                @Html.ActionLink("Повеќе", "Details", new { id = item.Id }); <span> | </span>
+                                @Html.ActionLink("Избриши", "Delete", new { id = item.Id });
+                            }
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+@section scripts{
+    
+<script>
+    $(document).ready(function () {
+        $('#companiesIndex').DataTable();
+    });
+</script>
+    }

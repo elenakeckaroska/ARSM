@@ -1,0 +1,103 @@
+﻿@model ARSM___Avtobusi_R.S.Makedonija.Models.Route
+
+
+<style>
+    dt {
+        color: #37c77f;
+    }
+
+    #firstBorder {
+        width: 199px;
+        height: 39px;
+        padding-top: 1px;
+        margin-top: 4px;
+        text-align: center;
+        border: 1px solid #383737d6;
+    }
+
+    #secondBorder {
+        border: 1px solid #383737d6;
+        width: 211px;
+        height: 34px;
+        text-align: center;
+        margin-left: -6px;
+        padding-top: 3px;
+    }
+
+        #firstBorder:hover, #secondBorder:hover {
+            background-color: #303030;
+            border-color: #303030;
+        }
+
+    #BoughtTicket {
+        color: lightgray;
+        font-size: 15px;
+    }
+
+        #BoughtTicket:hover {
+            padding-top: 1px;
+            font-size: 19px;
+            color: #fff;
+        }
+        #pocetna{
+            color:whitesmoke;
+        }
+</style>
+<hr />
+<div style="width: 450px; margin: auto;">
+    <img src="@Model.Company.Logo" width="125" height="125" style="border-radius: 50%" />
+    <h2 style=" width: 350px; margin-top: -78px; padding-bottom: 32px; margin-left: 150px; color: #37c77f;">@Model.Relation</h2>
+</div>
+
+<hr />
+<div>
+
+    <dl class="dl-horizontal" style=" font-size: 19px; font-family: Helvetica, sans-serif; padding-left:25px;">
+        <dt>
+            @Html.DisplayNameFor(model => model.Relation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Relation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimePlace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimePlace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <div id="firstBorder">
+            <div id="secondBorder">
+                @Html.ActionLink("Купи билет", "Create", "Tickets", new { routeId = Model.Id, companyId = Model.Company.Id }, htmlAttributes: new { id = "BoughtTicket" })
+            </div>
+        </div>
+    </dl>
+
+</div>
+
+<p>
+    @{
+        if (User.Identity.Name.ToLower().Contains(Model.Company.Name.ToLower()) || User.IsInRole("Administrator"))
+        {
+            <button type="button" class="btn btn-outline-dark">
+                @Html.ActionLink("Измени", "Edit", new { id = Model.Id })
+            </button>
+        }
+    }
+    <button type="button" class="btn btn-outline-dark" style="margin-left: 25px;">
+        @Html.ActionLink("Почетна", "Index","Home", null,htmlAttributes: new {id="pocetna"})
+    </button>
+
+</p>
+

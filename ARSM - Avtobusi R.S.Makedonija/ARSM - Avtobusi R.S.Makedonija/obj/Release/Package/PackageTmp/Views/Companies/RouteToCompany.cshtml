@@ -1,0 +1,30 @@
+﻿@model ARSM___Avtobusi_R.S.Makedonija.Models.RouteCompany
+@{
+    ViewBag.Title = "InsertNewRoute";
+}
+<style>
+    #Zacuvaj {
+        margin-top: -40px;
+        margin-left: 600px;
+        text-align: center;
+    }
+</style>
+<hr />
+<div style="text-align:center;">
+    <h2 style=" width: 750px; margin: auto; color: #37c77f;">Додади нова рута на @Model.company.Name</h2>
+</div>
+
+<hr />
+
+@using (Html.BeginForm("InsertRouteCompany", "Companies"))
+{
+    <div class="form-group" style=" margin-left: 303px; margin-top: 45px;">
+        <h5 style=" margin-top: 5px; color: #37c77f; margin-left: -158px;">Изберете ја претходно внесената релација според <span style="font-style: italic; color: white;">идентификацискиот број</span></h5>
+        @Html.DropDownListFor(m => m.RouteId, new SelectList(Model.routes, "Id", "Text"), new { @class = "form-control", id="Zacuvaj"})
+        @Html.HiddenFor(m => m.CompanyId)
+    </div>
+
+    <div class="form-group" style=" margin-left: 622px; margin-top: 65px; margin-bottom: 1000px;">
+        <button type="submit" class="btn btn-outline-dark">Зачувај</button>
+    </div>
+}

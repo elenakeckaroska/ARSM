@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNet.Identity
+
+<style>
+    #registerLink, #loginLink {
+        text-decoration: none;
+        color: lightgrey;
+    }
+
+        #registerLink:hover, #loginLink:hover {
+            text-decoration: underline;
+            text-decoration-color: rgba(55, 199, 127, 1);
+        }
+</style>
+@if (Request.IsAuthenticated)
+{
+    <style>
+
+        #hello {
+            width: 230px;
+            padding-right: 54px;
+            margin-right: 62px;
+            color: rgba(55, 199, 127, 1);
+            text-decoration: none;
+            margin-left: -9px;
+        }
+
+        #companies {
+            margin-left: -7px;
+            color: lightgrey;
+        }
+
+        #logoutForm {
+            margin-left: -11px;
+            color: lightgrey;
+        }
+
+        #logoff {
+            margin-left: 62px;
+            color: lightgrey;
+            text-decoration: none;
+        }
+
+            #logoff:hover {
+                text-decoration: underline;
+                text-decoration-color: rgba(55, 199, 127, 1);
+            }
+    </style>
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", id = "hello" })
+            </li>
+            <li><a id="logoff" href="javascript:document.getElementById('logoutForm').submit()">Одјава</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Регистрирај се", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Најави се", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

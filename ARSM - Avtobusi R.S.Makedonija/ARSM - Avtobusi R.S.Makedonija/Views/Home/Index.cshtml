@@ -1,0 +1,154 @@
+﻿@model IEnumerable<ARSM___Avtobusi_R.S.Makedonija.Models.Company>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    #firstBorder {
+        width: 199px;
+        height: 39px;
+        padding-top: 1px;
+        margin-top: 4px;
+        text-align: center;
+        border: 1px solid #383737d6;
+    }
+
+    #secondBorder {
+        border: 1px solid #383737d6;
+        width: 211px;
+        height: 34px;
+        text-align: center;
+        margin-left: -6px;
+        padding-top: 6px;
+    }
+
+    #companies-relations #firstBorder:hover, #companies-relations #secondBorder:hover {
+        background-color: #303030;
+        border-color: #303030;
+        font-size: 17px;
+        color: whitesmoke;
+    }
+</style>
+<div class="jumbotron">
+    <div id="welcome">
+        <img id="busImg" src="~/Content/Images/bus1.png" />
+        <h1>ДОБРЕ ДОЈДОВТЕ!</h1>
+        <p class="lead">Ова е прв веб сајт на сите македонски автобуски компании кои нудат електронска продажба на билети за патување.</p>
+        <div id="companies-relations" style=" margin-left: 700px;">
+            <div style=" margin-left: 168px;"><div id="firstBorder"><div id="secondBorder"><a href="#allCompanies">СИТЕ КОМПАНИИ ТУКА</a></div></div></div>
+            <div style="margin-right:163px;"><div id="firstBorder"><div id="secondBorder"><a href="#relationsTable"</div>СИТЕ РЕЛАЦИИ ТУКА</a></div></div>
+
+        </div>
+
+    </div>
+    <div id="arrow"><a href="#allCompanies"><img src="~/Content/Images/gif-arrow.gif" /></a></div>
+</div>
+
+
+<div style="margin: auto; text-align: center; margin-top: 99px;">
+    <h2 style=" width: 750px; margin: auto; color: #37c77f;">Помош за компаниите и клиентите</h2>
+</div>
+
+<hr />
+
+<div style=" margin: auto; margin-top: 100px; margin-bottom: 100px; width: 750px; text-align: center; font-size: 22px;">
+    <div style="margin-bottom: 25px;">
+        <button type="button" class="btn btn-outline-dark">
+            @Html.ActionLink("Како да купам билет?", "ZaKlienti", null, new { target = "_blank" })
+        </button>
+
+    </div>
+    <div>
+        <button type="button" class="btn btn-outline-dark">
+            @Html.ActionLink("Како да ја регистрирате Вашата компанија на овој веб сајт?", "ZaKompanii", null, new { target = "_blank" })
+        </button>
+
+    </div>
+</div>
+<div class="row" id="allCompanies">
+    <hr />
+    <h2 style="text-align: center; color: #37c77f;">КОМПАНИИ</h2>
+    @{
+        if (User.IsInRole("Administrator") || User.IsInRole("Company"))
+        {
+            <h6 style="color:whitesmoke; text-align: center;">
+                @Html.ActionLink("Додади ја својата компанија", "Create", "Companies")
+            </h6>
+        }
+    }
+    <hr />
+    @foreach (var c in Model)
+    {
+        <div class="col-md-4">
+
+            <h2><img src="@c.Logo" width="100" height="100" style="border-radius: 50%" % /></h2>
+            <button type="button" id="company" class="btn btn-outline-dark">@Html.ActionLink(c.Name, "Details", "Companies", new { id = c.Id }, new { style = "text-decoration:none; color:lightgray;" })</button>
+
+        </div>
+    }
+
+</div>
+<hr />
+<h2 style="text-align: center; color: #37c77f;">РЕЛАЦИИ</h2>
+@{
+    if (User.IsInRole("Administrator") || User.IsInRole("Company"))
+    {
+        <h6 style="color:whitesmoke; text-align: center;">
+            @Html.ActionLink("Додади нова релација", "Create", "Routes")
+        </h6>
+    }
+}
+<hr />
+<table id="relationsTable">
+
+    <thead>
+        <tr>
+            <th>Релација</th>
+            <th>Компанија</th>
+            <th>Време на поаѓање</th>
+            <th></th>
+        </tr>
+
+    </thead>
+    <tbody>
+
+        @foreach (var c in Model)
+        {
+            var company = c;
+            foreach (var r in c.Routes)
+            {
+                <tr>
+
+                    <td>@r.Relation</td>
+                    <td>@c.Name</td>
+                    <td>@r.TimePlace</td>
+                    <td>
+                        <a href="~/Routes/Details/@r.Id?idCompany=@c.Id">Види повеќе</a>
+                        @{
+                            if (User.IsInRole("Administrator"))
+                            {
+                                <span>                         <a href="~/Routes/Delete/@r.Id">     |       Избриши релација</a></span>
+                            }
+                        }
+
+                    </td>
+                </tr>
+
+
+            }
+
+        }
+    </tbody>
+
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#relationsTable').DataTable();
+        });
+    </script>
+}

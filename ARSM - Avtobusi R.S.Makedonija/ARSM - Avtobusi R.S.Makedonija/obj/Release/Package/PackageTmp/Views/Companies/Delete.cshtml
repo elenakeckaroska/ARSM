@@ -1,0 +1,61 @@
+﻿@model ARSM___Avtobusi_R.S.Makedonija.Models.Company
+
+@{
+    ViewBag.Title = "Delete";
+}
+<style>
+    dt, h3 {
+        color: #37c77f;
+    }
+</style>
+
+<h3>Дали сте сигирни дека сакате да ја избришете компанијата од овој веб сајт?</h3>
+<hr />
+<div>
+    <h4>Компанија @Model.Name</h4>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            Лого:
+        </dt>
+
+        <dd>
+            <img src="@Model.Logo" width="150" height="150" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Избриши" class="btn btn-default" /> |
+            @Html.ActionLink("Назад кон почетна", "Index", "Home")
+        </div>
+    }
+</div>

@@ -1,0 +1,25 @@
+﻿@model ARSM___Avtobusi_R.S.Makedonija.Models.AddToRoleModel
+@{
+    ViewBag.Title = "AddUserToRole";
+}
+
+<hr />
+<div style=" width: 800px; margin: auto;">
+    <h2 style="margin: auto; color: #37c77f;">Изберете улога за користење на веб сајтот</h2>
+</div>
+
+<hr />
+
+@using (Html.BeginForm("AddUserToRole", "Account"))
+{
+    <div class="form-group" style="margin:auto; width:450px;">
+        @Html.Label("Електронска адреса - email")
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-contrlol" })
+    </div>
+    <div class="form-group" style=" width: 250px; margin: auto; padding-top: 25px;">
+        @Html.Label("Улоги:")
+        @Html.DropDownListFor(m => m.SelectedRole, new SelectList(Model.Roles), new { @class = "form-contrlol" })
+    </div>
+    <button type="submit" class="btn btn-outline-dark" style=" margin-left: 550px; margin-top: 50px;">Зачувај</button>
+}
+

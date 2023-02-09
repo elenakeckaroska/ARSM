@@ -1,0 +1,78 @@
+﻿@model ARSM___Avtobusi_R.S.Makedonija.Models.Route
+
+
+<style>
+    dt {
+        color: #37c77f;
+    }
+
+    #BoughtTicket {
+        color: lightgray;
+        font-size: 15px;
+    }
+
+        #BoughtTicket:hover {
+            padding-top: 1px;
+            font-size: 19px;
+            color: #fff;
+        }
+</style>
+<hr />
+<div style="text-align: center;">
+    <h2 style=" width: 650px; margin: auto; color: #37c77f;">@Model.Relation</h2>
+</div>
+
+<hr />
+<div>
+
+    <dl class="dl-horizontal" style=" font-size: 19px; font-family: Helvetica, sans-serif; padding-left:25px;">
+        <dt>
+            @Html.Label("Идентификациски број (Ве молиме запаметете го овој број)")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Relation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Relation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimePlace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimePlace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+
+</div>
+
+<p>
+    @{
+        if (User.IsInRole("Company") || User.IsInRole("Administrator"))
+        {
+            <button type="button" class="btn btn-outline-dark">
+                @Html.ActionLink("Измени", "Edit", new { id = Model.Id })
+            </button>
+            <button type="button" class="btn btn-outline-dark">
+                @Html.ActionLink("Избери компанија", "Index","Companies")
+            </button>
+        }
+    }
+
+
+</p>
+

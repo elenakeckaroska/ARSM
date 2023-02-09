@@ -1,0 +1,53 @@
+﻿@model ARSM___Avtobusi_R.S.Makedonija.Models.Route
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<hr />
+<div style="margin:auto;">
+    <h2 style=" margin: auto; width: 450px; color: #37c77f;">Избриши релација</h2>
+</div>
+<hr />
+
+<h4 style="color: #37c77f;">Дали сте сигурни дека сакате да ја избришете оваа релација?</h4>
+<hr />
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Relation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Relation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimePlace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimePlace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="margin-top: 10px;">
+            <input type="submit" value="Избриши" class="btn btn-outline-dark" /> 
+            
+        </div>
+    }
+</div>

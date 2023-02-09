@@ -1,0 +1,112 @@
+﻿@model ARSM___Avtobusi_R.S.Makedonija.Models.Ticket
+
+@{
+    ViewBag.Title = "Payment";
+}
+
+<style>
+    h2 {
+        margin-left: 438px;
+        padding-bottom: 49px;
+        padding-top: 20px;
+    }
+
+    #month, #year {
+        width: 55px;
+    }
+
+    #CVC {
+        width: 85px;
+    }
+
+    #send {
+        box-shadow: 9px 6px 19px 6px #0d0c0c;
+        border: 0px solid black;
+        background-color: #303030;
+        border-radius: 3px;
+        display: inline-block;
+        cursor: pointer;
+        color: #687344;
+        font-size: 16px;
+        font-family: Arial;
+        font-weight: bold;
+        padding: 6px 33px;
+        text-decoration: none;
+        margin-left: 177px;
+    }
+
+        #send a {
+            text-decoration: none;
+        }
+
+    form div {
+        margin: 11px;
+    }
+
+        form div span {
+            margin-right: 10px;
+        }
+</style>
+<h2>Плаќање со картичка</h2>
+
+<form action="sent.php" method="post" name="frm" style="border: 3px solid white; width: 480px; margin: auto; padding: 25px;">
+
+    <div class="form-group">
+        <span><b>Број на картичка:</b></span>
+        <input type="text" pattern="^[0-9]{16}$" name="name_input" id="cardNum" onkeyup="myFunction()"><br>
+    </div>
+
+    <div class="form-group">
+        <span><b>Рок на важност:</b></span>
+        <input type="text" pattern="(0[1-9]|[12][0-9]|3[01])" name="name_input1" id="month" onkeyup="myFunction()" style="margin-left: 12px;">
+        <input type="text" pattern="20\d\d" name="name_input2" id="year" onkeyup="myFunction()" style="margin-left: 12px;"><br>
+    </div>
+
+    <div class="form-group">
+        <span><b>CVC2/CVV2 Број:</b></span>
+        <input type="text" pattern="[0-9]{3}" name="name_input2" id="CVC" onkeyup="myFunction()" style="margin-left: 3px;"><br />
+    </div>
+
+    <div class="form-group">
+        <span><b>Вкупно: @Model.Route.Price</b></span><br />
+    </div>
+
+
+    <button type="submit" class="button button-dark" id="send" style="margin-left: 123px;">
+        <a href="/Tickets/Print/@Model.Id" id="link" hidden>Превземи билет</a>
+    </button>
+
+</form>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        document.getElementById('send').disabled = "true";
+    });
+    function myFunction() {
+        var CardNum = document.getElementById('cardNum').value;
+        var Year = document.getElementById('year').value;
+        var CVCNUM = document.getElementById('CVC').value;
+        var Month = document.getElementById('month').value;
+
+
+        console.log(CardNum);
+
+        if (CardNum === "" || Year === "" || CVCNUM === "" || Month === "") {
+            document.getElementById('send').disabled = true;
+            document.getElementById('link').hidden = true;
+        } else {
+            document.getElementById('send').disabled = false;
+            document.getElementById('link').hidden = false;
+        }
+    }
+</script>
+
+
+
+
+
+
+
+

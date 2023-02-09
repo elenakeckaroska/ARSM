@@ -1,0 +1,97 @@
+﻿@model ARSM___Avtobusi_R.S.Makedonija.Models.Ticket
+
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    h2 {
+        color: #37c77f;
+        text-align: center;
+    }
+
+    #form {
+        font-family: Helvetica, sans-serif;
+        font-size: 19px;
+        font-family: Helvetica, sans-serif;
+        padding-left: 25px;
+    }
+
+        #form > div {
+            padding-top: 15px;
+        }
+</style>
+<hr />
+<h2>Вашиот билет</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" , id="form">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <span style="color: #37c77f;">
+                @Html.LabelFor(model => model.Route.Relation, "Релација:", htmlAttributes: new { @class = "control-label col-md-2" })
+            </span>
+            <div class="col-md-10">
+                @Model.Route.Relation
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span style="color: #37c77f;">
+                @Html.LabelFor(model => model.Route.TimePlace, htmlAttributes: new { @class = "control-label col-md-12" })
+            </span>
+            <div class="col-md-10">
+                @Model.Route.TimePlace
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span style="color: #37c77f;">
+                @Html.LabelFor(model => model.Route.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            </span>
+            <div class="col-md-10">
+                @Model.Route.Price
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span style="color: #37c77f;">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            </span>
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span style="color: #37c77f;">
+                @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+            </span>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="color: white">
+                <input type="submit" class="btn btn-outline-dark" value="Плати" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
