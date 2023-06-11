@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "restored": true,
+      "restoreTime": "2023-02-12T23:46:10.1014478Z"
+    }
+  },
+  "parameters": {
+    "mssql2.resourceGroupName": {
+      "Name": "mssql2.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "arsmdb"
+    },
+    "mssql2.subscriptionId": {
+      "Name": "mssql2.subscriptionId",
+      "Type": "subscription",
+      "Value": "d7274bee-c8cd-4c4b-921b-5ddc2d9e8de5"
+    }
+  }
+}
